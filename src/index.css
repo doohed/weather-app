@@ -10,6 +10,8 @@ body {
   background-attachment: fixed;
   background-position: center;
   background-size: auto 120vh;
+  color:white;
+  overflow: hidden;
 }
 
 code {
