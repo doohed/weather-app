@@ -4,7 +4,48 @@ function WeatherPage() {
   const [city, setCity] = useState("boston");
   const [holder, setHolder] = useState("");
   const [weather, setWeather] = useState(null);
+  const [cityNames, setCityNames] = useState([]);
   const apiKey = "7601d27d1a2f01b4687648daeedc6e6b";
+
+  useEffect(() => {
+    fetchCityNames();
+  }, []);
+
+  const fetchCityNames = async () => {
+    fetch("https://countriesnow.space/api/v0.1/countries/population/cities")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch data from the API");
+      }
+      // Parse the JSON response
+      return response.json();
+    })
+    .then(data => {
+      // Extract city names from the response
+      const cities = data.data.map(cityData => cityData.city.toLowerCase());
+      
+      
+      // cities.forEach(city => {
+      //   console.log(city);
+      // });
+      setCityNames(cities)
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  };
+  
+  const handleCityChange = (event) => {
+    setHolder(event.target.value);
+    const isCityValid = cityNames.includes(event.target.value.toLowerCase());
+    if (!isCityValid) {
+      console.error("Invalid city entered");
+    }
+  };
+
+  const change = () => {
+    setCity(holder);
+  };
 
   useEffect(() => {
     fetch(
@@ -14,16 +55,6 @@ function WeatherPage() {
       .then((data) => setWeather(data))
       .catch((error) => console.error("Error fetching weather data:", error));
   }, [apiKey, city]);
-
-  console.log(weather);
-
-  const handleCityChange = (event) => {
-    setHolder(event.target.value);
-  };
-
-  function change() {
-    setCity(holder);
-  }
 
   useEffect(() => {
     const setBackgroundImage = () => {
@@ -39,7 +70,7 @@ function WeatherPage() {
         };
         const weatherMain = weather.weather[0].main;
         if (backgroundImages.hasOwnProperty(weatherMain)) {
-          document.body.style.backgroundImage = `url(${backgroundImages[weatherMain]})`;    
+          document.body.style.backgroundImage = `url(${backgroundImages[weatherMain]})`;
         } else {
           document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?weather')`;
         }
@@ -48,6 +79,7 @@ function WeatherPage() {
 
     setBackgroundImage();
   }, [weather]);
+
   return (
     <div className="weather-container">
       <h1>Weather Information</h1>
@@ -67,13 +99,15 @@ function WeatherPage() {
           </h2>
           <p>Temperature: {weather.main.temp}°C</p>
           <p>Weather: {weather.weather[0].main}</p>
-          <p>Description: {weather.weather[0].description}</p>
-          {weather.weather[0].icon && (
-            <img
-              src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
-              alt="Weather Icon"
-            />
-          )}
+          <div>
+            <p>Description: {weather.weather[0].description}</p>
+            {weather.weather[0].icon && (
+              <img
+                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                alt="Weather Icon"
+              />
+            )}
+          </div>
         </div>
       ) : (
         <p>Loading...</p>
