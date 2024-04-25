@@ -1,11 +1,11 @@
 import "./App.css";
 
-import WeatherPage from "./components/WeatherPage";
+import WeatherPage from "./pages/WeatherPage";
 
 function App() {
 
   return (
-    <div className="App">
+    <div className="App justify-center">
       <WeatherPage/>
     </div>
   );
