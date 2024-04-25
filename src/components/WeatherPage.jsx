@@ -81,7 +81,7 @@ function WeatherPage() {
   }, [weather]);
 
   return (
-    <div className="weather-container">
+    <div className="weather-container bg-[#10fffffff] backdrop-blur-sm">
       <h1>Weather Information</h1>
       {weather ? (
         <div>
