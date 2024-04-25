@@ -97,7 +97,7 @@ function WeatherPage() {
           <h2>
             {weather.name}, {weather.sys.country}
           </h2>
-          <p>Temperature: {weather.main.temp}°C</p>
+          <p>Temperature: {weather.main.temp || 1}°C</p>
           <p>Weather: {weather.weather[0].main}</p>
           <div>
             <p>Description: {weather.weather[0].description}</p>
