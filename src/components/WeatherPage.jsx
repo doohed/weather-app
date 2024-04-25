@@ -39,7 +39,7 @@ function WeatherPage() {
         };
         const weatherMain = weather.weather[0].main;
         if (backgroundImages.hasOwnProperty(weatherMain)) {
-          document.body.style.backgroundImage = `url(${backgroundImages[weatherMain]})`;
+          document.body.style.backgroundImage = `url(${backgroundImages[weatherMain]})`;    
         } else {
           document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?weather')`;
         }
