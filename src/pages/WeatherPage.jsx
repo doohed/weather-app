@@ -9,7 +9,7 @@ function WeatherPage() {
   const [cityNames, setCityNames] = useState([]);
   const [isCityValid, setIsCityValid] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const apiKey = "7601d27d1a2f01b4687648daeedc6e6b";
+  const apiKey = "f294009b9a4437d54d118149fc958565";
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
