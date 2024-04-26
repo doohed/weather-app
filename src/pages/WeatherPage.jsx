@@ -125,10 +125,10 @@ function WeatherPage() {
     setBackgroundImage();
   }, [weather]);
   return (
-    <div className="weather-container bg-[#00000034]">
+    <div className="weather-container bg-[#00000069]">
       {weather ? (
         <div className="flex max-[1090px]:inline " onClick={() => setShowDropdown(false)} >
-          <div className="hidden absolute h-[100vh] w-[100vw] max-[1090px]:bg-[#00000034] max-[1090px]:backdrop-blur max-[1090px]:block"></div>
+          <div className="hidden absolute h-[100vh] w-[100vw] max-[1090px]:bg-[#00000069] max-[1090px]:backdrop-blur max-[1090px]:block"></div>
           <div className="left w-[60vw] h-[100vh] max-[1090px]:h-auto ">
             <div className="absolute left-[5vw] top-10 max-[1090px]:left-0 max-[1090px]:w-[100vw]">
               <h1 className="text-7xl max-[1090px]:text-5xl max-[1090px]:text-center">Weather.app</h1>
@@ -151,7 +151,7 @@ function WeatherPage() {
             <div className="absolute mt-[7vh] w-[30vw] left-[50%] translate-x-[-50%] max-[1090px]:w-[90vw]">
               <div>
                 <input
-                  className="rounded placeholder:text-gray-500 bg-[#00000011] border-0 w-[100%] p-3 outline-none hover:bg-[#00000048] ease-in-out duration-300 max-[1090px]:placeholder:text-gray-400"
+                  className="rounded placeholder:text-gray-400 bg-[#00000011] border-0 w-[100%] p-3 outline-none hover:bg-[#00000048] ease-in-out duration-300 max-[1090px]:placeholder:text-gray-400"
                   type="text"
                   placeholder={weather.name}
                   value={holder}
