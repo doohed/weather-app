@@ -10,22 +10,6 @@ function WeatherPage() {
   const [isCityValid, setIsCityValid] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const apiKey = "f294009b9a4437d54d118149fc958565";
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000); // Update time every second
-
-    // Clear the interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
-
-  const formatTime = (time) => {
-    const hours = time.getHours().toString().padStart(2, "0");
-    const minutes = time.getMinutes().toString().padStart(2, "0");
-    return `${hours}:${minutes}`;
-  };
 
   useEffect(() => {
     // Check if geolocation is supported by the browser
@@ -79,7 +63,7 @@ function WeatherPage() {
         return response.json();
       })
       .then((data) => {
-        const cities = data.data.map((cityData) => cityData.city.toLowerCase());
+        const cities = data.data.map((cityData) => cityData.city.toLowerCase().replace(/\s*\(.*?\)\s*/, ''));
         setCityNames(cities);
       })
       .catch((error) => {
@@ -115,7 +99,7 @@ function WeatherPage() {
       .then((response) => response.json())
       .then((data) => setWeather(data))
       .catch((error) => console.error("Error fetching weather data:", error));
-      console.log(weather);
+    console.log(weather);
   }, [apiKey, city]);
   useEffect(() => {
     const setBackgroundImage = () => {
@@ -143,36 +127,37 @@ function WeatherPage() {
   return (
     <div className="weather-container bg-[#00000034]">
       {weather ? (
-        <div className="flex" onClick={() => setShowDropdown(false)}>
-          <div className="left w-[60vw] h-[100vh]">
-            <div className="absolute left-[5vw] top-10">
-              <h1 className="text-7xl">Weather.app</h1>
+        <div className="flex max-[1090px]:inline " onClick={() => setShowDropdown(false)} >
+          <div className="hidden absolute h-[100vh] w-[100vw] max-[1090px]:bg-[#00000034] max-[1090px]:backdrop-blur max-[1090px]:block"></div>
+          <div className="left w-[60vw] h-[100vh] max-[1090px]:h-auto ">
+            <div className="absolute left-[5vw] top-10 max-[1090px]:left-0 max-[1090px]:w-[100vw]">
+              <h1 className="text-7xl max-[1090px]:text-5xl max-[1090px]:text-center">Weather.app</h1>
             </div>
-            <div className="absolute flex bottom-10 left-[5vw]">
-              <h1 className="text-8xl font-semibold">
-                {weather.main.temp || 1}°C
+            <div className="absolute flex bottom-10 left-[5vw] max-[1090px]:inline max-[1090px]:border-l-[3px] max-[1090px]:mb-[0vmin] max-[1090px]:w-[90%]">
+              <h1 className="text-8xl font-semibold max-[1090px]:text-6xl max-[1090px]:text-left max-[1090px]:ml-8">
+                {weather.main.temp | 0}°C
               </h1>
-              <div className="text-4xl text-left mt-3 ml-4 border-l-[3px]">
+              <div className="text-4xl text-left mt-3 ml-4 border-l-[3px] max-[1090px]:border-l-[0px]">
                 <div className="ml-4">
                   <h2>
                     {weather.name}, {weather.sys.country}
                   </h2>
-                  <h2>{formatTime(currentTime)}</h2>
+                  <h2>{weather.weather[0].description}</h2>
                 </div>
               </div>
             </div>
           </div>
-          <div className="relative bg-[#0000002d] backdrop-blur-sm right w-[40vw] h-[100vh]">
-            <div className="absolute mt-[7vh] w-[30vw] bg-gray-800 left-[50%] translate-x-[-50%]">
+          <div className="relative bg-[#0000002d] backdrop-blur-lg right w-[40vw] h-[100vh] max-[1090px]:h-auto max-[1090px]:w-[100vw] max-[1090px]:top-[15vh]">
+            <div className="absolute mt-[7vh] w-[30vw] left-[50%] translate-x-[-50%] max-[1090px]:w-[90vw]">
               <div>
                 <input
-                  className="rounded placeholder:text-gray-700 bg-[#00000079] border-0 w-[100%] p-3 outline-none hover:bg-[#00000028] ease-in-out duration-300"
+                  className="rounded placeholder:text-gray-500 bg-[#00000011] border-0 w-[100%] p-3 outline-none hover:bg-[#00000048] ease-in-out duration-300 max-[1090px]:placeholder:text-gray-400"
                   type="text"
                   placeholder={weather.name}
                   value={holder}
                   onChange={handleCityChange}
                 />
-                {error && showDropdown && <div>error bro</div>}
+                {error && showDropdown && <div className="rounded absolute left-[50%] translate-x-[-50%] bg-[#830909fd] p-1 mt-2">No matches</div>}
                 {showDropdown && (
                   <div className="text-left pl-3 rounded dropdown absolute w-[100%] bg-[#000000cb]">
                     {cityNames
@@ -192,13 +177,14 @@ function WeatherPage() {
                   </div>
                 )}
               </div>
-
-              <p>Weather: {weather.weather[0].main}</p>
-              <div>
-                <p>Description: {weather.weather[0].description}</p>
+              <div className="grid grid-cols-2 text-2xl mt-10 font-light">
+                <p className="text-left mt-10">Weather:</p>                
+                <p className="text-right mt-10">{weather.weather[0].main}</p>
+                <p className="text-left mt-10">Humidity:</p>
+                <p className="text-right mt-10">{weather.main.humidity} %</p>
+                <p className="text-left mt-10">Wind:</p>
+                <p className="text-right mt-10">{weather.wind.speed} Km/h</p>
               </div>
-              <p>humidity: {weather.main.humidity}</p>
-              <p>wind: {weather.main.humidity}</p>
             </div>
           </div>
         </div>
