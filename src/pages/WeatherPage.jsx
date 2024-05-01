@@ -133,7 +133,7 @@ function WeatherPage() {
             <div className="absolute left-[5vw] top-10 max-[1090px]:left-0 max-[1090px]:w-[100vw]">
               <h1 className="text-7xl max-[1090px]:text-5xl max-[1090px]:text-center">Weather.app</h1>
             </div>
-            <div className="absolute flex bottom-10 left-[5vw] max-[1090px]:inline max-[1090px]:border-l-[0px] max-[1090px]:mb-[0vmin] max-[1090px]:w-[90%] max-[1090px]:top-[130px] max-[1090px]:left-[-8px] ">
+            <div className="absolute bottom-10 left-[5vw] max-[1090px]:inline max-[1090px]:border-l-[0px] max-[1090px]:m-0 max-[1090px]:w-[100%] max-[1090px]:top-[130px] max-[1090px]:left-[-15px]">
               <h1 className="text-8xl font-semibold max-[1090px]:text-6xl max-[1090px]:ml-8 ">
                 {weather.main.temp | 0}°C
               </h1>
