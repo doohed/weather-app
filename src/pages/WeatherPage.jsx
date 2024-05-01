@@ -129,15 +129,15 @@ function WeatherPage() {
       {weather ? (
         <div className="flex max-[1090px]:inline " onClick={() => setShowDropdown(false)} >
           <div className="hidden absolute h-[100vh] w-[100vw] max-[1090px]:bg-[#00000069] max-[1090px]:backdrop-blur max-[1090px]:block"></div>
-          <div className="left w-[60vw] h-[100vh] max-[1090px]:h-auto ">
+          <div className="left w-[60vw] h-[100vh] max-[1090px]:h-auto">
             <div className="absolute left-[5vw] top-10 max-[1090px]:left-0 max-[1090px]:w-[100vw]">
               <h1 className="text-7xl max-[1090px]:text-5xl max-[1090px]:text-center">Weather.app</h1>
             </div>
-            <div className="absolute flex bottom-10 left-[5vw] max-[1090px]:inline max-[1090px]:border-l-[3px] max-[1090px]:mb-[0vmin] max-[1090px]:w-[90%]">
-              <h1 className="text-8xl font-semibold max-[1090px]:text-6xl max-[1090px]:text-left max-[1090px]:ml-8">
+            <div className="absolute flex bottom-10 left-[5vw] max-[1090px]:inline max-[1090px]:border-l-[0px] max-[1090px]:mb-[0vmin] max-[1090px]:w-[90%] max-[1090px]:top-[130px] max-[1090px]:left-[-8px] ">
+              <h1 className="text-8xl font-semibold max-[1090px]:text-6xl max-[1090px]:ml-8 ">
                 {weather.main.temp | 0}°C
               </h1>
-              <div className="text-4xl text-left mt-3 ml-4 border-l-[3px] max-[1090px]:border-l-[0px]">
+              <div className="text-4xl text-left mt-3 ml-4 border-l-[3px] max-[1090px]:border-l-[0px] max-[1090px]:text-center">
                 <div className="ml-4">
                   <h2>
                     {weather.name}, {weather.sys.country}
@@ -147,7 +147,7 @@ function WeatherPage() {
               </div>
             </div>
           </div>
-          <div className="relative bg-[#0000002d] backdrop-blur-lg right w-[40vw] h-[100vh] max-[1090px]:h-auto max-[1090px]:w-[100vw] max-[1090px]:top-[15vh]">
+          <div className="relative bg-[#0000002d] backdrop-blur-lg right w-[40vw] h-[100vh] max-[1090px]:h-auto max-[1090px]:w-[100vw] max-[1090px]:top-[250px]">
             <div className="absolute mt-[7vh] w-[30vw] left-[50%] translate-x-[-50%] max-[1090px]:w-[90vw]">
               <div>
                 <input
